@@ -1,0 +1,1 @@
+1. creating 3 new services => Movie catalog service , Movie Info service , Ratings data service
