@@ -1,0 +1,105 @@
+server:
+  port: 8081
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    #instance-id: ${spring.application.name}:${instance-id:${random.value}}
+#    instance-id: ${spring.application.name}:9090
+spring:
+  application:
+    name: movie-catalog-service
+
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Welcome12!@
+    url: jdbc:mysql://localhost:3306/movie_catalog
+
+  cloud:
+    stream:
+      bindings:
+        movieCatalogOut:
+          destination: catalog-out-channel
+          binder: rabbit1
+
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        # generate_statistics: true
+        jdbc:
+          batch_size: 4
+        order_inserts: true
+
+#  zipkin:
+#    base-url: http://192.168.1.100:9411
+#
+#oracleObjectStorage:
+#  #  privateKeyLocation : D:\\IIH-workspace\\File-Service\\new-public-private-key\\oci_api_key.pem
+#  privateKeyLocation : /home/iihsolutions/oci_key/oci_api_key.pem
+#  tenantId : ocid1.tenancy.oc1..aaaaaaaatd4ruv6b2di3yhedfect5b55w352xqinsjl4guoffamog2elppeq
+#  userId : ocid1.user.oc1..aaaaaaaa64wcextb6cpxhvbtwejiuqxdiepct64uouu2feqhj2huy4khqgxa
+#  #  userId : ocid1.user.oc1..aaaaaaaax7lwj6jyayxkrlafecfwqfmlne23nvtgf55vu6adl5djqhiss2uq
+#  #  fingerprint : 91:b4:75:14:5c:1e:44:0c:ad:f8:79:67:72:5d:f5:43
+#  fingerprint : ac:23:64:36:58:cd:b5:64:75:4c:24:4b:a6:d7:f5:c7
+#  #  fingerprint : 3a:f2:9a:ef:bc:ad:39:43:1d:9e:b2:08:71:d5:b9:52
+#  region : me-jeddah-1
+#  nameSpace : ax1lc80zdsdj
+#  bucketName : AdmissionDocuments
+#  reportBucketName: Reports
+#  referralBucketName: Referrals
+#  prescriptionBucketName: Prescription
+#  othersBucketName: Others
+#
+#
+#resilience4j:
+#  circuitbreaker:
+#    instances:
+#      encounterService:
+#        sliding-window-size: 10
+#        failure-rate-threshold: 50
+#        wait-duration-in-open-state: 30000
+#        automatic-transition-from-open-to-half-open-enabled: true
+#        permitted-number-of-calls-in-half-open-state: 5
+#        allow-health-indicator-to-fail: true
+#        register-health-indicator: true
+#management:
+#  health:
+#    circuitbreakers:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#          - health
+#  endpoint:
+#    health:
+#      show-details: always
+#
+#spring-doc:
+#  version: 1.0
+#
+#springdoc:
+#  pathsToMatch: /api/v1/**
+#
+#token:
+#  secret: jguy5675hghgtrljkh
+#    # testing
+#    # testing 1
+#
